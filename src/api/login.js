@@ -20,6 +20,15 @@ export function logout() {
   })
 }
 
+/*注册*/
+export function register(data) {
+  return request({
+    url: '/register',
+    method: 'post',
+    data:data
+  })
+}
+
 export function getInfo(token) {
   return request({
     url: '/user/info',

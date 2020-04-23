@@ -1,28 +1,29 @@
 <template>
-  <div class="login-wrapper">
-    <div class="login-box">
-      <h2 class="g-ta-c g-f-600 g-fz-18">欢迎登录</h2>
-      <div class="g-mt-20">
-        <el-form :label-position="labelPosition" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-          <el-form-item label="登录名" prop="name">
-            <el-input v-model="ruleForm.name"></el-input>
-          </el-form-item>
-          <el-form-item label="密码" prop="password">
-            <el-input type="password" v-model="ruleForm.password" effect="dark" show-password></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" size="medium" style="width: 380px;" @click="submitForm('ruleForm')">登录</el-button>
-          </el-form-item>
-        </el-form>
+  <div>
+    <div class="login-wrapper">
+      <div class="login-box">
+        <h2 class="g-ta-c g-f-600 g-fz-18">欢迎注册</h2>
+        <div class="g-mt-20">
+          <el-form :label-position="labelPosition" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            <el-form-item label="用户名" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="password">
+              <el-input type="password" v-model="ruleForm.password" effect="dark" show-password></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" size="medium" style="width: 380px;" @click="submitForm('ruleForm')">登录</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
     </div>
-    <router-link to="/register">注册</router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: "login",
+  name: "register",
   data() {
     return {
       labelPosition: 'right',//文字的对齐方式left、right、top
@@ -44,11 +45,11 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let param = {
+          let param = {//可能还有验证码或者其他，这里只写两个
             username: this.ruleForm.name,
             password: this.ruleForm.password,
           }
-          this.$store.dispatch('login',param)
+          this.$store.dispatch('register',param)
         } else {
           console.log('error submit!!');
           return false;

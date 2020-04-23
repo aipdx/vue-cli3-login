@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import _get from 'lodash.get'
 import cookie from 'js-cookie'
-import { login,logout } from '../api/login'
+import { login,logout,register } from '../api/login'
 import router from '../router'
 import createPersistedState from "vuex-persistedstate"
 
@@ -77,6 +77,24 @@ export default new Vuex.Store({
       store.commit('unsetToken')
       store.commit('unsetUser')
       router.push('/login')
+    },
+    /*注册*/
+    async register(store,payload) {
+      try {
+        const username = _get(payload,'username')
+        const res = await register(payload)
+        if (_get(res,'code') !== 1) {
+          return
+        }
+        const token = _get(res,'data.token')
+        const user = {  username }
+        store.commit('setToken',token)
+        store.commit('setUser',user)
+        cookie.set(process.env.VUE_APP_SESSION_KEY,token)
+      }catch (e) {
+        console.log(e)
+        return 'error'
+      }
     }
   },
   plugins: [
