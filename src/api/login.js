@@ -19,3 +19,18 @@ export function logout() {
     method: 'post'
   })
 }
+
+export function getInfo(token) {
+  return request({
+    url: '/user/info',
+    method: 'get',
+    token
+  })
+}
+
+export function getClassify(){
+  return request({
+    url: '/getcate',
+    method: 'get'
+  })
+}

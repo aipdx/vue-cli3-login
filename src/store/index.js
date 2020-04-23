@@ -58,7 +58,7 @@ export default new Vuex.Store({
         const username = _get(paylad,'username')
         const password = _get(paylad,'password')
         const res = await login(username,password)
-        if (_get(res,'code' !== 1)) {
+        if (_get(res,'code') !== 1) {
           return
         }
         const token = _get(res, 'data.token')
